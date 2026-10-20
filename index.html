@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexadecimal and Binary Conversion Table</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-6 flex flex-col items-center justify-center">
+
+    <div class="max-w-4xl w-full bg-slate-900 border border-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-2xl md:text-3xl font-bold text-cyan-400 tracking-wide mb-2">
+                Hexadecimal & Binary Conversion
+            </h1>
+            <p class="text-slate-400 text-sm">
+                Standard 4-Bit Nibble Reference Table
+            </p>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-slate-700 text-slate-400 text-xs uppercase tracking-wider bg-slate-800/50">
+                        <th class="py-3 px-4 rounded-tl-lg text-center">Hexadecimal</th>
+                        <th class="py-3 px-4 text-center">Binary (4-Bit)</th>
+                        <th class="py-3 px-4 rounded-tr-lg text-center">Decimal</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800/60 font-mono text-sm md:text-base">
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">0</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">0000</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">0</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">1</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">0001</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">1</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">2</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">0010</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">2</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">3</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">0011</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">3</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">4</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">0100</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">4</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">5</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">0101</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">5</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">6</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">0110</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">6</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">7</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">0111</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">7</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">8</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">1000</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">8</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">9</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">1001</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">9</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">A</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">1010</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">10</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">B</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">1011</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">11</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">C</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">1100</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">12</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">D</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">1101</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">13</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">E</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">1110</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">14</td>
+                    </tr>
+                    <tr class="hover:bg-slate-800/80 transition-colors">
+                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">F</td>
+                        <td class="py-2.5 px-4 text-center text-emerald-400">1111</td>
+                        <td class="py-2.5 px-4 text-center text-slate-400">15</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tip Footer -->
+        <div class="mt-6 text-center text-xs text-slate-500 border-t border-slate-800 pt-4">
+            Tip: Each Hexadecimal digit corresponds exactly to one 4-bit Binary nibble.
+        </div>
+    </div>
+
+</body>
+</html>
