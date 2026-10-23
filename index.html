@@ -1,132 +1,563 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hexadecimal and Binary Conversion Table</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hexadecimal & Binary Conversion Guide</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome v6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind Custom Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              900: '#312e81',
+            },
+            cyanAccent: {
+              400: '#22d3ee',
+              500: '#06b6d4',
+            }
+          }
         }
-    </style>
+      }
+    }
+  </script>
+
+  <style>
+    /* Base Background & Ambient Radial Glows */
+    body {
+      background-color: #070b12;
+      color: #cbd5e1;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .ambient-glow-1 {
+      position: fixed;
+      top: -10%;
+      left: -10%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-2 {
+      position: fixed;
+      top: -5%;
+      right: -10%;
+      width: 45vw;
+      height: 45vw;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-3 {
+      position: fixed;
+      bottom: -10%;
+      left: 30%;
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Glassmorphic Surfaces */
+    .glass-card {
+      background: rgba(18, 24, 38, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1rem;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    .glass-card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-card-hover:hover {
+      border-color: rgba(129, 140, 248, 0.3);
+      box-shadow: 0 12px 40px -10px rgba(99, 102, 241, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .glow-brand {
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Custom Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
 </head>
-<body class="min-h-screen p-6 flex flex-col items-center justify-center">
+<body class="min-h-screen relative overflow-x-hidden antialiased selection:bg-brand-500 selection:text-white">
 
-    <div class="max-w-4xl w-full bg-slate-900 border border-slate-800 rounded-xl shadow-2xl p-6 md:p-8">
-        
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-2xl md:text-3xl font-bold text-cyan-400 tracking-wide mb-2">
-                Hexadecimal & Binary Conversion
+  <!-- Background Ambient Glow Elements -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+  <div class="ambient-glow-3"></div>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+
+    <!-- Fixed Header -->
+    <header class="border-b border-white/10 bg-slate-950/70 backdrop-blur-md sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="p-2 bg-gradient-to-br from-brand-500 to-cyanAccent-500 rounded-xl text-white shadow-lg glow-brand">
+            <i class="fa-solid fa-calculator text-lg"></i>
+          </div>
+          <div>
+            <h1 class="text-lg sm:text-xl font-bold bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent leading-tight">
+              Hexadecimal & Binary Conversion
             </h1>
-            <p class="text-slate-400 text-sm">
-                Standard 4-Bit Nibble Reference Table
-            </p>
+            <p class="text-xs text-cyanAccent-400 font-medium">Standard 4-Bit Nibble Interactive Reference</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tab Bar -->
+    <nav class="sticky top-[64px] z-40 bg-slate-950/80 backdrop-blur-md border-b border-white/10 py-3">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4 overflow-x-auto">
+        <div class="flex items-center gap-2">
+          <button id="tab-btn-matrix" onclick="switchTab('matrix')" 
+            class="tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 bg-gradient-to-r from-brand-600 to-brand-500 text-white shadow-md glow-brand">
+            <i class="fa-solid fa-table"></i>
+            4-Bit Conversion Matrix
+          </button>
+          
+          <button id="tab-btn-converter" onclick="switchTab('converter')" 
+            class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+            <i class="fa-solid fa-calculator"></i>
+            Interactive Nibble Calculator
+          </button>
+
+          <button id="tab-btn-quiz" onclick="switchTab('quiz')" 
+            class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+            <i class="fa-solid fa-graduation-cap"></i>
+            Interactive Assessment
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      <!-- TAB 1: CONVERSION MATRIX TABLE -->
+      <section id="tab-matrix" class="tab-content block space-y-6">
+        
+        <!-- Search & Filter Card -->
+        <div class="glass-card p-5 border-brand-500/20 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div class="space-y-1 text-center md:text-left">
+            <h2 class="text-base font-bold text-white flex items-center justify-center md:justify-start gap-2">
+              <i class="fa-solid fa-magnifying-glass text-cyanAccent-400"></i>
+              Quick Table Filter
+            </h2>
+            <p class="text-xs text-slate-400">Search by Hexadecimal digit, 4-bit Binary pattern, or Decimal value.</p>
+          </div>
+
+          <div class="w-full md:w-72 relative">
+            <input type="text" id="table-search" onkeyup="filterTable()" placeholder="Search (e.g. 'A', '1010', '10')..." 
+              class="w-full bg-slate-950/80 border border-white/10 rounded-xl px-4 py-2 pl-10 text-xs font-mono text-white placeholder-slate-500 focus:outline-none focus:border-brand-400 transition">
+            <i class="fa-solid fa-search absolute left-3.5 top-2.5 text-slate-500 text-xs"></i>
+          </div>
         </div>
 
-        <!-- Table Container -->
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="border-b border-slate-700 text-slate-400 text-xs uppercase tracking-wider bg-slate-800/50">
-                        <th class="py-3 px-4 rounded-tl-lg text-center">Hexadecimal</th>
-                        <th class="py-3 px-4 text-center">Binary (4-Bit)</th>
-                        <th class="py-3 px-4 rounded-tr-lg text-center">Decimal</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-800/60 font-mono text-sm md:text-base">
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">0</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">0000</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">0</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">1</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">0001</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">1</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">2</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">0010</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">2</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">3</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">0011</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">3</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">4</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">0100</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">4</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">5</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">0101</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">5</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">6</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">0110</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">6</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">7</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">0111</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">7</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">8</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">1000</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">8</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-cyan-300">9</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">1001</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">9</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">A</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">1010</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">10</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">B</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">1011</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">11</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">C</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">1100</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">12</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">D</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">1101</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">13</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">E</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">1110</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">14</td>
-                    </tr>
-                    <tr class="hover:bg-slate-800/80 transition-colors">
-                        <td class="py-2.5 px-4 text-center font-bold text-amber-400">F</td>
-                        <td class="py-2.5 px-4 text-center text-emerald-400">1111</td>
-                        <td class="py-2.5 px-4 text-center text-slate-400">15</td>
-                    </tr>
-                </tbody>
+        <!-- Conversion Table Matrix Card -->
+        <div class="glass-card p-6 space-y-4">
+          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+            <div>
+              <h2 class="text-xl font-bold text-white flex items-center gap-3">
+                <span class="p-2 bg-brand-500/20 text-brand-400 rounded-lg text-sm">
+                  <i class="fa-solid fa-list-ol"></i>
+                </span>
+                Standard 4-Bit Nibble Reference
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">Each Hexadecimal digit corresponds directly to one 4-bit Binary nibble ($2^4 = 16$ states).</p>
+            </div>
+            <span class="text-xs px-3 py-1 rounded-full bg-cyanAccent-500/10 text-cyanAccent-400 border border-cyanAccent-500/20 font-mono">Base-16 ↔ Base-2 ↔ Base-10</span>
+          </div>
+
+          <div class="overflow-x-auto rounded-xl border border-white/10">
+            <table class="w-full text-center text-xs sm:text-sm" id="conversion-table">
+              <thead class="bg-slate-950/90 text-slate-400 font-mono text-xs uppercase">
+                <tr>
+                  <th class="p-3 border-b border-white/10">Hexadecimal</th>
+                  <th class="p-3 border-b border-white/10 text-emerald-400">Binary (4-Bit Nibble)</th>
+                  <th class="p-3 border-b border-white/10 text-cyanAccent-400">Decimal Equivalent</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/5 font-mono">
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">0</td><td class="p-3 text-emerald-400 font-bold">0000</td><td class="p-3 text-slate-300">0</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">1</td><td class="p-3 text-emerald-400 font-bold">0001</td><td class="p-3 text-slate-300">1</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">2</td><td class="p-3 text-emerald-400 font-bold">0010</td><td class="p-3 text-slate-300">2</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">3</td><td class="p-3 text-emerald-400 font-bold">0011</td><td class="p-3 text-slate-300">3</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">4</td><td class="p-3 text-emerald-400 font-bold">0100</td><td class="p-3 text-slate-300">4</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">5</td><td class="p-3 text-emerald-400 font-bold">0101</td><td class="p-3 text-slate-300">5</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">6</td><td class="p-3 text-emerald-400 font-bold">0110</td><td class="p-3 text-slate-300">6</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">7</td><td class="p-3 text-emerald-400 font-bold">0111</td><td class="p-3 text-slate-300">7</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">8</td><td class="p-3 text-emerald-400 font-bold">1000</td><td class="p-3 text-slate-300">8</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-cyan-300">9</td><td class="p-3 text-emerald-400 font-bold">1001</td><td class="p-3 text-slate-300">9</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-amber-400 bg-amber-500/10">A</td><td class="p-3 text-emerald-400 font-bold">1010</td><td class="p-3 text-slate-300">10</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-amber-400 bg-amber-500/10">B</td><td class="p-3 text-emerald-400 font-bold">1011</td><td class="p-3 text-slate-300">11</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-amber-400 bg-amber-500/10">C</td><td class="p-3 text-emerald-400 font-bold">1100</td><td class="p-3 text-slate-300">12</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-amber-400 bg-amber-500/10">D</td><td class="p-3 text-emerald-400 font-bold">1101</td><td class="p-3 text-slate-300">13</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-amber-400 bg-amber-500/10">E</td><td class="p-3 text-emerald-400 font-bold">1110</td><td class="p-3 text-slate-300">14</td></tr>
+                <tr class="hover:bg-slate-800/40 transition"><td class="p-3 font-bold text-amber-400 bg-amber-500/10">F</td><td class="p-3 text-emerald-400 font-bold">1111</td><td class="p-3 text-slate-300">15</td></tr>
+              </tbody>
             </table>
+          </div>
         </div>
 
-        <!-- Tip Footer -->
-        <div class="mt-6 text-center text-xs text-slate-500 border-t border-slate-800 pt-4">
-            Tip: Each Hexadecimal digit corresponds exactly to one 4-bit Binary nibble.
-        </div>
-    </div>
+      </section>
 
+      <!-- TAB 2: INTERACTIVE CONVERTER & NIBBLE BREAKDOWN -->
+      <section id="tab-converter" class="tab-content hidden space-y-8">
+        
+        <!-- Live Bit-Switch Nibble Construction Tool -->
+        <div class="glass-card p-6 space-y-6">
+          <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+            <div>
+              <h2 class="text-xl font-bold text-white flex items-center gap-3">
+                <span class="p-2 bg-brand-500/20 text-brand-400 rounded-lg text-sm">
+                  <i class="fa-solid fa-sliders"></i>
+                </span>
+                Interactive Bit-Switch Nibble Constructor
+              </h2>
+              <p class="text-xs text-slate-400 mt-1">Toggle the individual 4 bits below to calculate the Hexadecimal and Decimal output live.</p>
+            </div>
+          </div>
+
+          <!-- Bit Switches -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <!-- Bit 3 (Weight 8) -->
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-white/10 text-center space-y-2">
+              <span class="text-xs font-mono text-slate-400 block">Bit 3 (Weight 8)</span>
+              <button id="bit-8" onclick="toggleBit(8)" class="w-full py-3 rounded-xl font-mono text-lg font-bold bg-slate-800 text-slate-400 border border-white/10 transition">
+                0
+              </button>
+            </div>
+            <!-- Bit 2 (Weight 4) -->
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-white/10 text-center space-y-2">
+              <span class="text-xs font-mono text-slate-400 block">Bit 2 (Weight 4)</span>
+              <button id="bit-4" onclick="toggleBit(4)" class="w-full py-3 rounded-xl font-mono text-lg font-bold bg-slate-800 text-slate-400 border border-white/10 transition">
+                0
+              </button>
+            </div>
+            <!-- Bit 1 (Weight 2) -->
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-white/10 text-center space-y-2">
+              <span class="text-xs font-mono text-slate-400 block">Bit 1 (Weight 2)</span>
+              <button id="bit-2" onclick="toggleBit(2)" class="w-full py-3 rounded-xl font-mono text-lg font-bold bg-slate-800 text-slate-400 border border-white/10 transition">
+                0
+              </button>
+            </div>
+            <!-- Bit 0 (Weight 1) -->
+            <div class="bg-slate-950/80 p-4 rounded-2xl border border-white/10 text-center space-y-2">
+              <span class="text-xs font-mono text-slate-400 block">Bit 0 (Weight 1)</span>
+              <button id="bit-1" onclick="toggleBit(1)" class="w-full py-3 rounded-xl font-mono text-lg font-bold bg-slate-800 text-slate-400 border border-white/10 transition">
+                0
+              </button>
+            </div>
+          </div>
+
+          <!-- Calculated Outputs -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-950/90 p-5 rounded-2xl border border-brand-500/20 text-center font-mono">
+            <div>
+              <span class="text-xs text-slate-400 block mb-1">Binary Pattern (4-Bit)</span>
+              <span id="output-binary" class="text-2xl font-bold text-emerald-400">0000</span>
+            </div>
+            <div>
+              <span class="text-xs text-slate-400 block mb-1">Hexadecimal Digit</span>
+              <span id="output-hex" class="text-2xl font-bold text-amber-400">0</span>
+            </div>
+            <div>
+              <span class="text-xs text-slate-400 block mb-1">Decimal Equivalent</span>
+              <span id="output-decimal" class="text-2xl font-bold text-cyanAccent-400">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SVG Architecture Diagram: Nibble Positional Mapping -->
+        <div class="glass-card p-6 space-y-4">
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-sitemap text-cyanAccent-400"></i>
+            4-Bit Positional Weight Architecture
+          </h2>
+          <p class="text-xs text-slate-400">Vector representation of 4-bit nibble binary positional powers ($2^3, 2^2, 2^1, 2^0$) mapped to Hexadecimal digits.</p>
+
+          <div class="bg-slate-950/80 p-6 rounded-2xl border border-white/5 overflow-x-auto">
+            <svg viewBox="0 0 700 140" class="w-full min-w-[600px] h-auto font-sans">
+              <!-- Positional Box 8 -->
+              <g transform="translate(20, 20)">
+                <rect x="0" y="0" width="130" height="90" rx="12" fill="#0f172a" stroke="#6366f1" stroke-width="2" />
+                <text x="65" y="30" text-anchor="middle" fill="#818cf8" font-weight="bold" font-size="12">Bit 3 ($2^3$)</text>
+                <text x="65" y="55" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="20">8</text>
+                <text x="65" y="75" text-anchor="middle" fill="#94a3b8" font-size="10">MSB (Most Significant)</text>
+              </g>
+
+              <!-- Positional Box 4 -->
+              <g transform="translate(180, 20)">
+                <rect x="0" y="0" width="130" height="90" rx="12" fill="#0f172a" stroke="#06b6d4" stroke-width="2" />
+                <text x="65" y="30" text-anchor="middle" fill="#22d3ee" font-weight="bold" font-size="12">Bit 2 ($2^2$)</text>
+                <text x="65" y="55" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="20">4</text>
+                <text x="65" y="75" text-anchor="middle" fill="#94a3b8" font-size="10">Bit Weight</text>
+              </g>
+
+              <!-- Positional Box 2 -->
+              <g transform="translate(340, 20)">
+                <rect x="0" y="0" width="130" height="90" rx="12" fill="#0f172a" stroke="#f59e0b" stroke-width="2" />
+                <text x="65" y="30" text-anchor="middle" fill="#fbbf24" font-weight="bold" font-size="12">Bit 1 ($2^1$)</text>
+                <text x="65" y="55" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="20">2</text>
+                <text x="65" y="75" text-anchor="middle" fill="#94a3b8" font-size="10">Bit Weight</text>
+              </g>
+
+              <!-- Positional Box 1 -->
+              <g transform="translate(500, 20)">
+                <rect x="0" y="0" width="130" height="90" rx="12" fill="#0f172a" stroke="#10b981" stroke-width="2" />
+                <text x="65" y="30" text-anchor="middle" fill="#34d399" font-weight="bold" font-size="12">Bit 0 ($2^0$)</text>
+                <text x="65" y="55" text-anchor="middle" fill="#ffffff" font-weight="bold" font-size="20">1</text>
+                <text x="65" y="75" text-anchor="middle" fill="#94a3b8" font-size="10">LSB (Least Significant)</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- TAB 3: INTERACTIVE QUIZ ASSESSMENT -->
+      <section id="tab-quiz" class="tab-content hidden space-y-6">
+        
+        <!-- Score Header -->
+        <div class="glass-card p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-brand-500/20">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-brand-500/20 text-brand-400 rounded-xl text-xl">
+              <i class="fa-solid fa-award"></i>
+            </div>
+            <div>
+              <h2 class="text-lg font-bold text-white">Knowledge Check Quiz</h2>
+              <p class="text-xs text-slate-400">Test your mastery of Hexadecimal, Binary 4-bit nibbles, and Decimal conversions.</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-6 bg-slate-950/80 px-5 py-3 rounded-2xl border border-white/10">
+            <div class="text-right">
+              <span class="text-xs text-slate-400 block font-medium">Current Score</span>
+              <span class="font-mono text-xl font-bold text-brand-400"><span id="score">0</span> / <span id="total-q">4</span></span>
+            </div>
+            <button onclick="resetQuiz()" class="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-white/10 transition flex items-center gap-1.5">
+              <i class="fa-solid fa-rotate-right text-cyanAccent-400"></i> Restart
+            </button>
+          </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="space-y-6">
+          <!-- Injected via JavaScript -->
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-slate-950/80 backdrop-blur-md py-6 text-center text-xs text-slate-500">
+      <div class="max-w-7xl mx-auto px-4">
+        Hexadecimal & Binary Conversion Study Guide • Rendered with Glassmorphic Design System
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- JavaScript Logic -->
+  <script>
+    /* Tab Switching Logic */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-gradient-to-r', 'from-brand-600', 'to-brand-500', 'text-white', 'shadow-md', 'glow-brand');
+        btn.classList.add('text-slate-400', 'hover:text-slate-200', 'hover:bg-slate-800/50');
+      });
+
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+
+      const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+      if (activeBtn) {
+        activeBtn.classList.add('active', 'bg-gradient-to-r', 'from-brand-600', 'to-brand-500', 'text-white', 'shadow-md', 'glow-brand');
+        activeBtn.classList.remove('text-slate-400', 'hover:text-slate-200', 'hover:bg-slate-800/50');
+      }
+
+      const activeContent = document.getElementById(`tab-${tabId}`);
+      if (activeContent) {
+        activeContent.classList.remove('hidden');
+      }
+    }
+
+    /* Live Table Search Filter */
+    function filterTable() {
+      const input = document.getElementById("table-search").value.toUpperCase();
+      const rows = document.querySelectorAll("#conversion-table tbody tr");
+
+      rows.forEach(row => {
+        const text = row.innerText.toUpperCase();
+        row.style.display = text.indexOf(input) > -1 ? "" : "none";
+      });
+    }
+
+    /* Bit-Switch Nibble Constructor State */
+    const bitStates = { 8: 0, 4: 0, 2: 0, 1: 0 };
+
+    function toggleBit(weight) {
+      bitStates[weight] = bitStates[weight] === 0 ? 1 : 0;
+      const btn = document.getElementById(`bit-${weight}`);
+
+      if (bitStates[weight] === 1) {
+        btn.textContent = "1";
+        btn.className = "w-full py-3 rounded-xl font-mono text-lg font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/40 transition shadow-sm";
+      } else {
+        btn.textContent = "0";
+        btn.className = "w-full py-3 rounded-xl font-mono text-lg font-bold bg-slate-800 text-slate-400 border border-white/10 transition";
+      }
+
+      calculateNibble();
+    }
+
+    function calculateNibble() {
+      const dec = bitStates[8] * 8 + bitStates[4] * 4 + bitStates[2] * 2 + bitStates[1] * 1;
+      const bin = `${bitStates[8]}${bitStates[4]}${bitStates[2]}${bitStates[1]}`;
+      const hex = dec.toString(16).toUpperCase();
+
+      document.getElementById('output-binary').textContent = bin;
+      document.getElementById('output-hex').textContent = hex;
+      document.getElementById('output-decimal').textContent = dec;
+    }
+
+    /* Assessment Module */
+    const questions = [
+      {
+        q: "What is the 4-bit binary nibble representation for Hexadecimal digit 'A'?",
+        options: ["1001", "1010", "1100", "1110"],
+        answer: 1,
+        explanation: "Hexadecimal 'A' equals Decimal 10. In 4-bit binary: $8 + 2 = 1010_2$."
+      },
+      {
+        q: "Which Hexadecimal character represents the 4-bit binary pattern '1111'?",
+        options: ["E", "15", "F", "D"],
+        answer: 2,
+        explanation: "Binary $1111_2 = 8 + 4 + 2 + 1 = 15_{10}$, which is represented as 'F' in Hexadecimal."
+      },
+      {
+        q: "How many bits are in a standard nibble?",
+        options: ["2 bits", "4 bits", "8 bits", "16 bits"],
+        answer: 1,
+        explanation: "A nibble is strictly defined as a 4-bit aggregation, corresponding to exactly one Hexadecimal digit."
+      },
+      {
+        q: "Convert Decimal value 13 into Hexadecimal and 4-bit binary.",
+        options: ["C and 1100", "D and 1101", "E and 1110", "B and 1011"],
+        answer: 1,
+        explanation: "Decimal 13 corresponds to Hexadecimal 'D' ($8 + 4 + 1 = 1101_2$)."
+      }
+    ];
+
+    let currentScore = 0;
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      document.getElementById('total-q').textContent = questions.length;
+      container.innerHTML = '';
+
+      questions.forEach((qObj, index) => {
+        const card = document.createElement('div');
+        card.className = 'glass-card p-6 space-y-4';
+
+        let optionsHTML = '';
+        qObj.options.forEach((opt, optIdx) => {
+          optionsHTML += `
+            <button class="option-btn text-left w-full p-4 rounded-xl bg-slate-950/80 hover:bg-slate-800/80 border border-white/10 text-xs sm:text-sm text-slate-200 transition duration-200 flex items-center justify-between group" onclick="checkAnswer(${index}, ${optIdx})">
+              <span>${opt}</span>
+              <i class="fa-regular fa-circle text-slate-500 group-hover:text-brand-400 transition"></i>
+            </button>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-400">Question ${index + 1} of ${questions.length}</span>
+          </div>
+          <p class="text-sm sm:text-base font-semibold text-white">${qObj.q}</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="options-${index}">
+            ${optionsHTML}
+          </div>
+          <div class="feedback hidden p-4 rounded-xl text-xs sm:text-sm font-sans leading-relaxed border" id="feedback-${index}"></div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function checkAnswer(qIdx, selectedIdx) {
+      const qObj = questions[qIdx];
+      const optionsContainer = document.getElementById(`options-${qIdx}`);
+      const buttons = optionsContainer.querySelectorAll('.option-btn');
+      const feedback = document.getElementById(`feedback-${qIdx}`);
+
+      buttons.forEach(btn => btn.disabled = true);
+
+      if (selectedIdx === qObj.answer) {
+        buttons[selectedIdx].className = 'text-left w-full p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 font-semibold text-xs sm:text-sm flex items-center justify-between';
+        buttons[selectedIdx].querySelector('i').className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
+        
+        feedback.className = 'feedback p-4 rounded-xl text-xs sm:text-sm font-sans leading-relaxed border bg-emerald-950/40 border-emerald-500/30 text-emerald-300 block';
+        feedback.innerHTML = `<strong class="text-emerald-400 block mb-1"><i class="fa-solid fa-check mr-1"></i> Correct!</strong> ${qObj.explanation}`;
+        currentScore++;
+      } else {
+        buttons[selectedIdx].className = 'text-left w-full p-4 rounded-xl bg-rose-950/80 border border-rose-500/50 text-rose-300 text-xs sm:text-sm flex items-center justify-between';
+        buttons[selectedIdx].querySelector('i').className = 'fa-solid fa-circle-xmark text-rose-400 text-lg';
+
+        buttons[qObj.answer].className = 'text-left w-full p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 font-semibold text-xs sm:text-sm flex items-center justify-between';
+        buttons[qObj.answer].querySelector('i').className = 'fa-solid fa-circle-check text-emerald-400 text-lg';
+
+        feedback.className = 'feedback p-4 rounded-xl text-xs sm:text-sm font-sans leading-relaxed border bg-rose-950/40 border-rose-500/30 text-rose-300 block';
+        feedback.innerHTML = `<strong class="text-rose-400 block mb-1"><i class="fa-solid fa-xmark mr-1"></i> Incorrect</strong> ${qObj.explanation}`;
+      }
+
+      document.getElementById('score').textContent = currentScore;
+    }
+
+    function resetQuiz() {
+      currentScore = 0;
+      document.getElementById('score').textContent = '0';
+      renderQuiz();
+    }
+
+    /* Initialize Quiz */
+    renderQuiz();
+  </script>
 </body>
 </html>
